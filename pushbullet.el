@@ -96,6 +96,14 @@
 	      ("title" . ,title)
 	      ("body" . ,text))))))
 
+(defun pb/push-item-default (text type title)
+  (pb/ensure-device-ids)
+  (unless (= (length selection) 0)
+    (pb/push-item pb/device-ids text type title)))
+
+(defun pb/push-note (text title)
+  (pb/push-item-default text "note" title))
+
 (defun pb/error-callback (res hdrs)
   (message "curl error! %s" hdrs))
 
@@ -141,9 +149,7 @@
 	 (list (region-beginning) (region-end) push-title)
        (list (point-min) (point-max) push-title))))
   (let ((selection (buffer-substring-no-properties start end)))
-    (pb/ensure-device-ids)
-    (unless (= (length selection) 0)
-      (pb/push-item pb/device-ids selection "note" title))))
+    (pb/push-note selection title)))
 
 (provide 'pushbullet)
 
