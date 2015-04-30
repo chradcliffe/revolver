@@ -98,7 +98,7 @@
 
 (defun pb/push-item-default (text type title)
   (pb/ensure-device-ids)
-  (unless (= (length selection) 0)
+  (unless (= (length text) 0)
     (pb/push-item pb/device-ids text type title)))
 
 (defun pb/push-note (text title)
